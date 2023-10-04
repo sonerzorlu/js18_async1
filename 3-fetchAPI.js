@@ -17,15 +17,20 @@ console.log("FETCH")
 // .then((res)=>res.json())
 // .then((data)=>console.log(data))
 // .catch((err)=>console.log(err))
-fetch('https://api.github.com/users')
+fetch('https://api.github.com/user')
 .then((res)=> {
   if(!res.ok){
-    throw new Error(`something went wrong ${res.status}`)
+    throw new Error(`something went wrong ,${res.status} error code`)
   }
   return res.json()
 })
 .then((data)=> showGithubUsers(data))
-.catch((err)=>console.log(err))
+.catch((err)=>{
+  console.log(err)
+  const article = document.querySelector(".users")
+
+  article.innerHTML += `<h2> ${err} </h2>`
+})
 
 const showGithubUsers = (users)=>{
   const article = document.querySelector('.users')
